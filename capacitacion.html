@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Centro de capacitación en seguridad de construcción: video formativo, relatos de trabajadores con experiencia y evaluación interactiva con constancia.">
+  <title>Centro de Capacitación y Testimonios | APP NEW WORLD</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-link" aria-label="Inicio APP NEW WORLD">
+        <img src="imagenes/logo.svg" alt="Logo APP NEW WORLD Seguridad en Obra y IESS" class="brand-logo">
+      </a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú de navegación">
+        ☰
+      </button>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="riesgos.html">Riesgos y EPP</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="beneficios-iess.html">Beneficios IESS</a></li>
+          <li><a href="capacitacion.html" class="active">Capacitación</a></li>
+          <li class="nav-session-item"><span id="headerUserSession" class="nav-session-badge">Sin sesión</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-compact no-print">
+      <div class="container">
+        <span class="hero-badge">Formación en Seguridad</span>
+        <h1>Centro de Capacitación, Video y Testimonios</h1>
+        <p>
+          Aprende mediante material audiovisual, experiencias reales de trabajadores con años en obra
+          y valida tus conocimientos con nuestra evaluación rápida de seguridad.
+        </p>
+      </div>
+    </section>
+
+    <!-- Video Formativo -->
+    <section class="section no-print">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Material Audiovisual</span>
+          <h2>Video de Inducción en Prevención de Riesgos</h2>
+          <p>Revisa el video informativo antes de realizar la evaluación de conocimientos.</p>
+        </div>
+
+        <div class="grid-2" style="align-items: center;">
+          <div class="video-wrapper">
+            <video controls preload="metadata" poster="imagenes/imagen4.jpg">
+              <source src="video/video2.mp4" type="video/mp4">
+              Tu navegador no puede reproducir este video.
+            </video>
+          </div>
+
+          <div class="card card-accent">
+            <h3>Puntos clave del video formativo</h3>
+            <ul style="padding-left: 1.2rem; display: grid; gap: 0.65rem;">
+              <li>Nunca inicies labores en altura, excavación o instalaciones eléctricas sin inspección previa y EPP completo.</li>
+              <li>Reporta cualquier condición insegura (andamios inestables, cables pelados, falta de señalización) de inmediato al supervisor.</li>
+              <li>Verifica que tu afiliación al IESS esté activa desde el primer día de contrato.</li>
+              <li>La prisa y el exceso de confianza son las causas principales de accidentes evitables en construcción.</li>
+            </ul>
+            <div style="margin-top: 1.25rem;">
+              <a href="#evaluacion" class="btn btn-primary">Ir a la evaluación de seguridad</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Relatos de trabajadores antiguos -->
+    <section class="section section-alt no-print">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Voces con Experiencia</span>
+          <h2>Relatos de Trabajadores Antiguos de Obra</h2>
+          <p>
+            Experiencias compartidas por maestros y operarios veteranos para orientar a los nuevos trabajadores
+            sobre por qué la prevención y el seguro del IESS salvan familias.
+          </p>
+        </div>
+
+        <div class="grid-3" id="listaRelatos"></div>
+
+        <div class="card" style="margin-top: 1.75rem;">
+          <h3>Comparte tu consejo o experiencia en obra</h3>
+          <form id="formRelato" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="relatoAutor">Tu nombre *</label>
+                <input type="text" id="relatoAutor" placeholder="Ej: Carlos Paredes" required>
+              </div>
+              <div class="form-group">
+                <label for="relatoOficio">Oficio y años de experiencia *</label>
+                <input type="text" id="relatoOficio" placeholder="Ej: Maestro albañil · 12 años en obra" required>
+              </div>
+              <div class="form-group full-width">
+                <label for="relatoTexto">Consejo o relato de seguridad *</label>
+                <textarea id="relatoTexto" rows="2" placeholder="¿Qué enseñanza de seguridad le darías a un trabajador nuevo?" required></textarea>
+              </div>
+              <div class="form-group full-width">
+                <button type="submit" class="btn btn-secondary">Publicar relato</button>
+              </div>
+            </div>
+            <div id="relatoFeedback" class="alert" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Evaluación interactiva de seguridad -->
+    <section class="section" id="evaluacion">
+      <div class="container">
+        <div class="section-header no-print">
+          <span class="section-kicker">Validación de Conocimientos</span>
+          <h2>Evaluación Rápida de Seguridad en Obra</h2>
+          <p>Responde las 6 preguntas. Al obtener 70% o más, se generará tu constancia visual imprimible de inducción completada.</p>
+        </div>
+
+        <div class="card no-print">
+          <form id="formQuiz" novalidate>
+            <div class="form-group" style="max-width: 420px; margin-bottom: 1.25rem;">
+              <label for="quizNombre">Nombre del participante (para la constancia) *</label>
+              <input type="text" id="quizNombre" placeholder="Ej: Juan Geovanny Minaya" required>
+            </div>
+
+            <div id="quizContenedor"></div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;">
+              <button type="submit" class="btn btn-primary">Calificar evaluación</button>
+              <button type="button" id="btnReiniciarQuiz" class="btn btn-outline-dark">Reiniciar respuestas</button>
+            </div>
+            <div id="quizResultado" class="alert" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+
+        <!-- Constancia imprimible -->
+        <div id="certificadoBox" class="certificate-box hidden" aria-live="polite">
+          <span class="badge badge-ok">INDUCCIÓN APROBADA</span>
+          <h3 style="margin-top: 0.75rem;">CONSTANCIA DE CAPACITACIÓN EN SEGURIDAD EN OBRA</h3>
+          <p>APP NEW WORLD certifica que el participante:</p>
+          <div class="certificate-name" id="certNombre"></div>
+          <p>
+            Ha completado satisfactoriamente la evaluación de <strong>Prevención de Riesgos Laborales y Beneficios de Ley (IESS)</strong>
+            con un puntaje de <strong id="certPuntaje"></strong>.
+          </p>
+          <p class="helper-text" id="certFecha"></p>
+          <div class="no-print" style="margin-top: 1.25rem;">
+            <button type="button" id="btnImprimirCert" class="btn btn-secondary">Imprimir / Guardar en PDF</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>APP NEW WORLD</h3>
+          <p>
+            Plataforma educativa para la prevención de riesgos laborales en el sector de la construcción
+            y orientación sobre beneficios de ley ante el IESS en Ecuador.
+          </p>
+        </div>
+        <div>
+          <h3>Navegación</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio y Registro</a></li>
+            <li><a href="riesgos.html">Riesgos Laborales y EPP</a></li>
+            <li><a href="servicios.html">Servicios y Cotizador</a></li>
+            <li><a href="beneficios-iess.html">Beneficios de Ley e IESS</a></li>
+            <li><a href="capacitacion.html">Centro de Capacitación</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Información Académica</h3>
+          <p>
+            <strong>Desarrollado por:</strong> Juan Geovanny Minaya Cajia<br>
+            <strong>Asignatura:</strong> Fundamentos de Programación I<br>
+            <strong>Institución:</strong> ISP ADE — Quito, Ecuador
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 APP NEW WORLD · Seguridad en Construcción</span>
+        <span>Uso informativo y educativo sobre PRL y normativa IESS</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

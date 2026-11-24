@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo interactivo de servicios de prevención de riesgos laborales, carrito de solicitudes y cotizador de capacitaciones para constructoras.">
+  <title>Servicios y Cotizador | APP NEW WORLD</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-link" aria-label="Inicio APP NEW WORLD">
+        <img src="imagenes/logo.svg" alt="Logo APP NEW WORLD Seguridad en Obra y IESS" class="brand-logo">
+      </a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú de navegación">
+        ☰
+      </button>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="riesgos.html">Riesgos y EPP</a></li>
+          <li><a href="servicios.html" class="active">Servicios</a></li>
+          <li><a href="beneficios-iess.html">Beneficios IESS</a></li>
+          <li><a href="capacitacion.html">Capacitación</a></li>
+          <li class="nav-session-item"><span id="headerUserSession" class="nav-session-badge">Sin sesión</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-compact">
+      <div class="container">
+        <span class="hero-badge">Catálogo de Servicios · Base de Datos</span>
+        <h1>Servicios de Prevención y Capacitaciones para Constructoras</h1>
+        <p>
+          Consulta nuestros servicios informativos gratuitos para trabajadores de obra ($0.00) y agrega
+          al carrito capacitaciones especializadas para empresas constructoras ($35.00).
+        </p>
+      </div>
+    </section>
+
+    <!-- Catálogo con buscador, filtro por categoría y carrito -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Catálogo Interactivo</span>
+          <h2>Nuestros Servicios</h2>
+          <p>Busca por nombre, filtra por categoría y selecciona los servicios que deseas incluir en tu solicitud.</p>
+        </div>
+
+        <div class="services-toolbar card">
+          <div class="toolbar-fields">
+            <div class="form-group">
+              <label for="campoBuscar">Buscar servicio</label>
+              <input type="search" id="campoBuscar" placeholder="Ej: eléctricos, caídas, capacitaciones...">
+            </div>
+
+            <div class="form-group">
+              <label for="selCategoria">Categoría</label>
+              <select id="selCategoria">
+                <option value="todas">Todas las categorías</option>
+                <option value="Seguridad General">Seguridad General</option>
+                <option value="Riesgos en Obra">Riesgos en Obra</option>
+                <option value="Riesgos Técnicos">Riesgos Técnicos</option>
+                <option value="Salud Laboral">Salud Laboral</option>
+                <option value="Empresas">Empresas</option>
+              </select>
+            </div>
+
+            <div class="form-group toolbar-btn-wrap">
+              <button type="button" id="btnFiltrar" class="btn btn-primary">Buscar</button>
+            </div>
+          </div>
+          <p class="helper-text" id="resumenServicios" style="margin: 0.75rem 0 0;"></p>
+        </div>
+
+        <div class="services-layout">
+          <!-- Lista de tarjetas de servicios generadas dinámicamente con JavaScript -->
+          <div>
+            <ul id="listaProductos" class="services-grid"></ul>
+          </div>
+
+          <!-- Columna lateral: Gestión de Cuentas (Clase 13) y Carrito de compras -->
+          <div class="services-sidebar">
+            <!-- Zona Mi Cuenta (Requerimiento Clase 13: Registro, Login y Pedidos por Usuario) -->
+            <section id="zonaCuenta" class="card card-navy account-panel" aria-label="Zona de gestión de cuenta">
+              <h2>Mi cuenta</h2>
+              <p class="helper-text" style="margin-bottom: 0.75rem;">
+                Crea una cuenta o inicia sesión para tramitar solicitudes y revisar tus pedidos guardados.
+              </p>
+
+              <!-- Campos de formulario para credenciales -->
+              <div class="account-fields">
+                <div class="form-group">
+                  <label for="cuUsuario">Usuario *</label>
+                  <input type="text" id="cuUsuario" placeholder="Ej: ana_obrera">
+                </div>
+                <div class="form-group">
+                  <label for="cuClave">Contraseña *</label>
+                  <input type="password" id="cuClave" placeholder="Mínimo 6 caracteres">
+                </div>
+              </div>
+
+              <!-- Botones de acción para registro, ingreso y salida -->
+              <div class="account-actions">
+                <button type="button" id="btnRegistro" class="btn btn-outline-dark">Crear cuenta</button>
+                <button type="button" id="btnEntrar" class="btn btn-primary">Iniciar sesión</button>
+                <button type="button" id="btnSalir" class="btn btn-danger-ghost">Cerrar sesión</button>
+              </div>
+
+              <!-- Párrafos requeridos por Clase 13 para feedback y estado de sesión -->
+              <p id="mensajeCuenta" class="account-msg" role="status" aria-live="polite"></p>
+              <p id="estadoSesion" class="session-status">Sin sesión.</p>
+
+              <!-- Sección de pedidos acumulados del usuario activo -->
+              <div class="orders-box">
+                <h3>Mis pedidos</h3>
+                <ul id="listaPedidos" class="orders-list"></ul>
+              </div>
+            </section>
+
+            <!-- Panel del Carrito de Servicios con botón de compra obligatoria con sesión -->
+            <aside class="card card-accent cart-panel" aria-label="Carrito de servicios">
+              <h3>Mi carrito de servicios</h3>
+              <p id="textoCarrito" class="cart-summary">El carrito está vacío.</p>
+              <ul id="detalleCarrito" class="cart-items"></ul>
+
+              <div class="cart-actions">
+                <!-- Botón requerido por Clase 13 para finalizar la compra -->
+                <button type="button" id="btnComprar" class="btn btn-primary">Finalizar compra</button>
+                <button type="button" id="btnVaciar" class="btn btn-outline-dark">Vaciar carrito</button>
+              </div>
+
+              <!-- Párrafo requerido por Clase 13 para mostrar advertencias o agradecimiento de compra -->
+              <p id="mensajeCompra" class="alert-inline" role="status" aria-live="polite"></p>
+              <div id="carritoFeedback" class="alert" role="status" aria-live="polite"></div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cotizador de capacitaciones (Funciones con parámetros y return) -->
+    <section class="section section-alt" id="cotizador">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Cotizador Rápido</span>
+          <h2>Calculadora de Total para Capacitaciones</h2>
+          <p>
+            Calcula el costo total de capacitaciones para tu constructora según el precio unitario
+            (valor base $35.00), número de sesiones o cuadrillas y descuento corporativo opcional.
+          </p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Datos de cotización</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="campoPrecio">Precio unitario (USD) *</label>
+                <input type="number" id="campoPrecio" value="35.00" min="0" step="0.01" placeholder="35.00">
+              </div>
+
+              <div class="form-group">
+                <label for="campoCantidad">Cantidad de sesiones / cuadrillas *</label>
+                <input type="number" id="campoCantidad" value="1" min="1" step="1" placeholder="Ej: 3">
+              </div>
+
+              <div class="form-group full-width">
+                <label for="campoDescuento">Descuento corporativo (% opcional, 0 a 50)</label>
+                <input type="number" id="campoDescuento" value="0" min="0" max="50" step="1" placeholder="Ej: 10">
+                <span class="helper-text">Aplica un porcentaje de descuento por volumen para empresas constructoras.</span>
+              </div>
+
+              <div class="form-group full-width">
+                <button type="button" id="btnTotal" class="btn btn-primary">Calcular total</button>
+              </div>
+            </div>
+            <p id="resultadoTotal" class="alert" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="card card-navy">
+            <h3>Resumen de la tabla de servicios (BD)</h3>
+            <p>Estructura de datos base utilizada por la plataforma para trabajadores y constructoras:</p>
+            <div class="table-wrap" style="margin-top: 1rem;">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Servicio</th>
+                    <th>Precio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td>Seguridad en el trabajo</td><td>$0.00</td></tr>
+                  <tr><td>2</td><td>Caídas al mismo nivel</td><td>$0.00</td></tr>
+                  <tr><td>3</td><td>Golpes y cortes</td><td>$0.00</td></tr>
+                  <tr><td>4</td><td>Riesgos eléctricos</td><td>$0.00</td></tr>
+                  <tr><td>5</td><td>Riesgos ergonómicos y físicos</td><td>$0.00</td></tr>
+                  <tr><td>6</td><td><strong>Capacitaciones para la constructora</strong></td><td><strong>$35.00</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>APP NEW WORLD</h3>
+          <p>
+            Plataforma educativa para la prevención de riesgos laborales en el sector de la construcción
+            y orientación sobre beneficios de ley ante el IESS en Ecuador.
+          </p>
+        </div>
+        <div>
+          <h3>Navegación</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio y Registro</a></li>
+            <li><a href="riesgos.html">Riesgos Laborales y EPP</a></li>
+            <li><a href="servicios.html">Servicios y Cotizador</a></li>
+            <li><a href="beneficios-iess.html">Beneficios de Ley e IESS</a></li>
+            <li><a href="capacitacion.html">Centro de Capacitación</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Información Académica</h3>
+          <p>
+            <strong>Desarrollado por:</strong> Juan Geovanny Minaya Cajia<br>
+            <strong>Asignatura:</strong> Fundamentos de Programación I<br>
+            <strong>Institución:</strong> ISP ADE — Quito, Ecuador
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 APP NEW WORLD · Seguridad en Construcción</span>
+        <span>Uso informativo y educativo sobre PRL y normativa IESS</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

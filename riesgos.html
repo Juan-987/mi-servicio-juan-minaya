@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo interactivo de riesgos laborales en construcción, galería de EPP y lista diaria de verificación pre-obra.">
+  <title>Riesgos Laborales y EPP | APP NEW WORLD</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-link" aria-label="Inicio APP NEW WORLD">
+        <img src="imagenes/logo.svg" alt="Logo APP NEW WORLD Seguridad en Obra y IESS" class="brand-logo">
+      </a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú de navegación">
+        ☰
+      </button>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="riesgos.html" class="active">Riesgos y EPP</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="beneficios-iess.html">Beneficios IESS</a></li>
+          <li><a href="capacitacion.html">Capacitación</a></li>
+          <li class="nav-session-item"><span id="headerUserSession" class="nav-session-badge">Sin sesión</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-compact">
+      <div class="container">
+        <span class="hero-badge">Prevención Activa en Obra</span>
+        <h1>Riesgos Laborales y Equipos de Protección Personal (EPP)</h1>
+        <p>
+          Identifica los peligros más frecuentes en la construcción, aplica las medidas preventivas
+          obligatorias y verifica tu equipo de protección antes de iniciar cada jornada.
+        </p>
+      </div>
+    </section>
+
+    <!-- Catálogo interactivo de riesgos -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Catálogo Interactivo</span>
+          <h2>Principales Riesgos en Construcción</h2>
+          <p>Filtra por categoría o busca un riesgo específico para revisar cómo prevenirlo y qué EPP necesitas.</p>
+        </div>
+
+        <div class="toolbar">
+          <div class="filter-pills" id="filtrosRiesgos" role="group" aria-label="Filtrar riesgos por categoría">
+            <button type="button" class="filter-btn active" data-categoria="todos">Todos</button>
+            <button type="button" class="filter-btn" data-categoria="altura">Altura</button>
+            <button type="button" class="filter-btn" data-categoria="electrico">Eléctrico</button>
+            <button type="button" class="filter-btn" data-categoria="estructural">Excavación y Golpes</button>
+            <button type="button" class="filter-btn" data-categoria="salud">Salud y Ergonomía</button>
+          </div>
+          <div class="search-box">
+            <label for="buscadorRiesgos" class="sr-only">Buscar riesgo laboral</label>
+            <input type="search" id="buscadorRiesgos" placeholder="Buscar: arnés, casco, zanja, eléctrico...">
+          </div>
+        </div>
+
+        <p class="helper-text" id="resumenCatalogo" style="margin-bottom: 1rem;"></p>
+        <div class="grid-2" id="gridRiesgos"></div>
+      </div>
+    </section>
+
+    <!-- Checklist interactivo diario de EPP -->
+    <section class="section section-alt">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Autoevaluación Diaria</span>
+          <h2>Lista de Verificación de EPP Antes de Entrar a Obra</h2>
+          <p>Marca cada elemento que tienes en buen estado antes de empezar tu turno. Tu progreso se guarda automáticamente.</p>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+            <strong>Progreso de inspección: <span id="eppPorcentaje">0%</span> (<span id="eppCompletados">0</span>/7)</strong>
+            <button type="button" id="btnReiniciarEpp" class="btn btn-outline-dark">Reiniciar checklist</button>
+          </div>
+
+          <div class="progress-bar-track" aria-hidden="true">
+            <div class="progress-bar-fill" id="eppBarra"></div>
+          </div>
+
+          <div class="checklist-grid" id="checklistEpp">
+            <label class="check-item">
+              <input type="checkbox" value="casco">
+              <span><strong>Casco de seguridad</strong><br><small>Con barboquejo y sin fisuras</small></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" value="botas">
+              <span><strong>Botas punta de acero</strong><br><small>Suela antideslizante y dieléctrica</small></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" value="chaleco">
+              <span><strong>Chaleco reflectivo</strong><br><small>Alta visibilidad en zona de tránsito</small></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" value="gafas">
+              <span><strong>Gafas de seguridad</strong><br><small>Protección contra partículas y polvo</small></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" value="guantes">
+              <span><strong>Guantes de trabajo</strong><br><small>Anticorte o dieléctricos según tarea</small></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" value="auditiva">
+              <span><strong>Protección auditiva y mascarilla</strong><br><small>Para ruido elevado, corte y cemento</small></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" value="arnes">
+              <span><strong>Arnés y línea de vida</strong><br><small>Obligatorio sobre 1.80 metros de altura</small></span>
+            </label>
+          </div>
+
+          <div id="eppEstado" class="alert alert-warning" role="status" aria-live="polite">
+            Marca tu equipo obligatorio para verificar si estás listo para ingresar a obra.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Galería visual de seguridad con las 5 imágenes reales -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Guía Visual de Seguridad</span>
+          <h2>Buenas Prácticas en Obra y PRL</h2>
+          <p>Referencia visual de los componentes fundamentales para mantener un entorno de construcción seguro.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card gallery-card">
+            <img src="imagenes/imagen1.jpg" alt="Ilustración de protección integral y bienestar del equipo de trabajadores">
+            <div class="gallery-body">
+              <h3>1. Cultura de Protección Integral</h3>
+              <p>La seguridad es responsabilidad compartida: la empresa entrega capacitación y equipo, y el trabajador aplica cada norma en obra.</p>
+            </div>
+          </article>
+
+          <article class="card gallery-card">
+            <img src="imagenes/imagen2.jpg" alt="Supervisores de obra con casco y chaleco verificando procedimientos de seguridad en una tableta">
+            <div class="gallery-body">
+              <h3>2. Supervisión y Permisos de Trabajo</h3>
+              <p>Antes de ejecutar tareas críticas (altura, soldadura o excavación) se debe revisar el procedimiento y permisos con el supervisor.</p>
+            </div>
+          </article>
+
+          <article class="card gallery-card">
+            <img src="imagenes/imagen3.jpg" alt="Conjunto completo de EPP: casco amarillo, guantes, gafas protectoras, respirador, orejeras y chaleco reflectivo">
+            <div class="gallery-body">
+              <h3>3. Kit Completo de EPP</h3>
+              <p>Casco, protección ocular, respiratoria, auditiva, guantes y chaleco son la última barrera que salva vidas ante un imprevisto.</p>
+            </div>
+          </article>
+
+          <article class="card gallery-card">
+            <img src="imagenes/imagen4.jpg" alt="Carpeta de Prevención de Riesgos Laborales, botiquín de primeros auxilios, señal de advertencia y equipo de seguridad">
+            <div class="gallery-body">
+              <h3>4. Plan PRL y Botiquín en Obra</h3>
+              <p>Cada frente de trabajo debe contar con señalización visible, plan de prevención de riesgos y botiquín de primeros auxilios equipado.</p>
+            </div>
+          </article>
+
+          <article class="card gallery-card">
+            <img src="imagenes/imagen5.jpg" alt="Equipo de trabajadores y supervisores de construcción sonriendo con cascos, chalecos reflectivos y planos de obra">
+            <div class="gallery-body">
+              <h3>5. Trabajo en Equipo sin Accidentes</h3>
+              <p>Una cuadrilla capacitada, comunicada y asegurada al IESS logra obras más productivas, seguras y libres de sanciones.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>APP NEW WORLD</h3>
+          <p>
+            Plataforma educativa para la prevención de riesgos laborales en el sector de la construcción
+            y orientación sobre beneficios de ley ante el IESS en Ecuador.
+          </p>
+        </div>
+        <div>
+          <h3>Navegación</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio y Registro</a></li>
+            <li><a href="riesgos.html">Riesgos Laborales y EPP</a></li>
+            <li><a href="servicios.html">Servicios y Cotizador</a></li>
+            <li><a href="beneficios-iess.html">Beneficios de Ley e IESS</a></li>
+            <li><a href="capacitacion.html">Centro de Capacitación</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Información Académica</h3>
+          <p>
+            <strong>Desarrollado por:</strong> Juan Geovanny Minaya Cajia<br>
+            <strong>Asignatura:</strong> Fundamentos de Programación I<br>
+            <strong>Institución:</strong> ISP ADE — Quito, Ecuador
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 APP NEW WORLD · Seguridad en Construcción</span>
+        <span>Uso informativo y educativo sobre PRL y normativa IESS</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

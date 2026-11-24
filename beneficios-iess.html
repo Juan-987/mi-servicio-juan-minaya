@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Beneficios de ley en Ecuador, cobertura del IESS por riesgos del trabajo, protocolo ante accidentes y calculadora estimada de aportes.">
+  <title>Beneficios de Ley e IESS | APP NEW WORLD</title>
+  <link rel="stylesheet" href="css/estilos.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="index.html" class="brand-link" aria-label="Inicio APP NEW WORLD">
+        <img src="imagenes/logo.svg" alt="Logo APP NEW WORLD Seguridad en Obra y IESS" class="brand-logo">
+      </a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Abrir menú de navegación">
+        ☰
+      </button>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="riesgos.html">Riesgos y EPP</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="beneficios-iess.html" class="active">Beneficios IESS</a></li>
+          <li><a href="capacitacion.html">Capacitación</a></li>
+          <li class="nav-session-item"><span id="headerUserSession" class="nav-session-badge">Sin sesión</span></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero-compact">
+      <div class="container">
+        <span class="hero-badge">Derechos Laborales · Ecuador</span>
+        <h1>Beneficios de Ley y Cobertura del IESS</h1>
+        <p>
+          Conoce los derechos que te protegen desde el primer día de trabajo en una constructora,
+          cómo te respalda el Seguro General de Riesgos del Trabajo y cuánto corresponde a tus beneficios de ley.
+        </p>
+      </div>
+    </section>
+
+    <!-- Derechos y cobertura IESS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Marco de Protección</span>
+          <h2>¿Por qué es indispensable estar afiliado al IESS?</h2>
+          <p>En Ecuador, todo trabajador bajo relación de dependencia debe ser afiliado desde el primer día de labores. Esto protege tanto al trabajador como a la empresa constructora.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card card-accent">
+            <h3>Seguro de Riesgos del Trabajo</h3>
+            <p>
+              Cubre atención médica inmediata, rehabilitación, subsidios por incapacidad temporal e
+              indemnizaciones o pensiones en caso de accidente laboral o enfermedad profesional, sin exigir
+              tiempo mínimo de aportes en accidentes de trabajo.
+            </p>
+          </article>
+
+          <article class="card card-accent">
+            <h3>Salud, Maternidad y Familia</h3>
+            <p>
+              Acceso a consulta médica, emergencias, hospitalización, medicamentos y cobertura de salud
+              para hijos menores de 18 años, además de acceso futuro a jubilación y créditos del BIESS.
+            </p>
+          </article>
+
+          <article class="card card-accent">
+            <h3>Beneficios Económicos de Ley</h3>
+            <p>
+              Derecho a remuneración justa (al menos el SBU o salario sectorial de construcción),
+              décimo tercer sueldo, décimo cuarto sueldo, vacaciones pagadas, utilidades y fondos de reserva
+              a partir del mes 13 con el mismo empleador.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Calculadora Interactiva de Beneficios IESS -->
+    <section class="section section-alt" id="calculadora">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Herramienta Práctica</span>
+          <h2>Calculadora Estimada de Aportes IESS y Beneficios de Ley</h2>
+          <p>Ingresa tu sueldo mensual para estimar tus aportes al IESS y el equivalente mensual de tus beneficios de ley en Ecuador (referencia educativa).</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Parámetros de cálculo</h3>
+            <form id="formCalculadoraIess" novalidate>
+              <div class="form-grid">
+                <div class="form-group full-width">
+                  <label for="calcSueldo">Sueldo mensual bruto (USD) *</label>
+                  <input type="number" id="calcSueldo" value="470" min="1" step="0.01" required>
+                  <span class="helper-text">Ejemplo: SBU vigente o salario sectorial de construcción.</span>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="calcSbu">Salario Básico Unificado (SBU) de referencia (USD)</label>
+                  <input type="number" id="calcSbu" value="470" min="1" step="1" required>
+                  <span class="helper-text">Utilizado para calcular el décimo cuarto sueldo.</span>
+                </div>
+
+                <div class="form-group full-width">
+                  <label for="calcAntiguedad">¿Llevas más de 1 año con el mismo empleador?</label>
+                  <select id="calcAntiguedad">
+                    <option value="no">No (menos de 1 año — sin fondos de reserva aún)</option>
+                    <option value="si">Sí (más de 1 año — incluye fondos de reserva 8.33%)</option>
+                  </select>
+                </div>
+
+                <div class="form-group full-width">
+                  <button type="submit" class="btn btn-primary">Calcular beneficios</button>
+                </div>
+              </div>
+              <div id="calcError" class="alert" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Desglose mensual estimado</h3>
+            <div class="calc-results" id="calcResultados">
+              <div class="result-box">
+                <span>Aporte personal IESS (9.45%)</span>
+                <strong id="resAportePersonal">$0.00</strong>
+              </div>
+              <div class="result-box">
+                <span>Aporte patronal IESS (11.15%)</span>
+                <strong id="resAportePatronal">$0.00</strong>
+              </div>
+              <div class="result-box">
+                <span>Sueldo neto tras aporte personal</span>
+                <strong id="resSueldoNeto">$0.00</strong>
+              </div>
+              <div class="result-box">
+                <span>Décimo tercero (mensualizado)</span>
+                <strong id="resDecimoTercero">$0.00</strong>
+              </div>
+              <div class="result-box">
+                <span>Décimo cuarto (mensualizado)</span>
+                <strong id="resDecimoCuarto">$0.00</strong>
+              </div>
+              <div class="result-box">
+                <span>Fondos de reserva (8.33%)</span>
+                <strong id="resFondosReserva">$0.00</strong>
+              </div>
+              <div class="result-box highlight">
+                <span>Ingreso mensual equivalente (neto + beneficios de ley)</span>
+                <strong id="resTotalMensual">$0.00</strong>
+              </div>
+            </div>
+            <p class="helper-text" style="margin-top: 1rem;">
+              * Cálculo referencial basado en tasas generales del sector privado en Ecuador (9.45% personal / 11.15% patronal). No incluye horas extras ni impuesto a la renta.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Protocolo ante Accidente Laboral -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-kicker">Guía de Acción Inmediata</span>
+          <h2>¿Qué hacer si ocurre un accidente en obra?</h2>
+          <p>Actuar rápido y documentar el evento correctamente salva vidas y garantiza la cobertura del IESS.</p>
+        </div>
+
+        <ol class="steps-list">
+          <li class="step-item">
+            <div class="step-number">1</div>
+            <div>
+              <h3>Asegurar la zona y activar emergencias</h3>
+              <p>Detén la actividad peligrosa para evitar más heridos, brinda primeros auxilios básicos si estás capacitado y llama de inmediato al <strong>ECU 911</strong> en casos graves.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">2</div>
+            <div>
+              <h3>Atención médica inmediata en el IESS o red de emergencia</h3>
+              <p>Traslada al trabajador al centro de salud u hospital del IESS más cercano indicando claramente que se trata de un <strong>accidente de trabajo</strong>.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">3</div>
+            <div>
+              <h3>Notificar al empleador y presentar el Aviso de Accidente (10 días)</h3>
+              <p>El empleador tiene la obligación de registrar el <strong>Aviso de Accidente de Trabajo</strong> en el portal del IESS dentro de los primeros <strong>10 días laborables</strong>. Si no lo hace, el propio trabajador o su familiar puede reportarlo.</p>
+            </div>
+          </li>
+          <li class="step-item">
+            <div class="step-number">4</div>
+            <div>
+              <h3>Investigación y corrección de causas en obra</h3>
+              <p>La constructora debe investigar qué falló (EPP, señalización, procedimiento o capacitación) para corregir la condición insegura y evitar que el accidente vuelva a ocurrir.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>APP NEW WORLD</h3>
+          <p>
+            Plataforma educativa para la prevención de riesgos laborales en el sector de la construcción
+            y orientación sobre beneficios de ley ante el IESS en Ecuador.
+          </p>
+        </div>
+        <div>
+          <h3>Navegación</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Inicio y Registro</a></li>
+            <li><a href="riesgos.html">Riesgos Laborales y EPP</a></li>
+            <li><a href="servicios.html">Servicios y Cotizador</a></li>
+            <li><a href="beneficios-iess.html">Beneficios de Ley e IESS</a></li>
+            <li><a href="capacitacion.html">Centro de Capacitación</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Información Académica</h3>
+          <p>
+            <strong>Desarrollado por:</strong> Juan Geovanny Minaya Cajia<br>
+            <strong>Asignatura:</strong> Fundamentos de Programación I<br>
+            <strong>Institución:</strong> ISP ADE — Quito, Ecuador
+          </p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 APP NEW WORLD · Seguridad en Construcción</span>
+        <span>Uso informativo y educativo sobre PRL y normativa IESS</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
